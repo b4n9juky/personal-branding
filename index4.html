@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmad Ridhwan - Untuk Masa Depan Kita</title>
+    <meta name="description" content="Situs resmi Ahmad Ridhwan. Bersama mewujudkan kemajuan dan kesejahteraan masyarakat.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Include Alpine.js for lightweight interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #334155;
+        }
+        
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .gradient-primary {
+            background: linear-gradient(135deg, #134E4A 0%, #14B8A6 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #14B8A6 0%, #F59E0B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F0FDFA;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #5EEAD4;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #14B8A6;
+        }
+
+        /* Animasi Keren Latar Belakang Hero (Durasi 3 detik) */
+        @keyframes gradient-xy {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .bg-animate-gradient {
+            background: linear-gradient(-45deg, #134E4A, #0F766E, #14B8A6, #0D9488);
+            background-size: 400% 400%;
+            animation: gradient-xy 3s ease infinite;
+        }
+        
+        /* Animasi Objek Melayang (Cahaya) */
+        @keyframes float-shape {
+            0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+            50% { transform: translateY(-30px) scale(1.1) rotate(5deg); }
+        }
+        
+        .animate-float {
+            animation: float-shape 3s ease-in-out infinite;
+        }
+        
+        .animate-float-delayed {
+            animation: float-shape 3s ease-in-out infinite;
+            animation-delay: 1.5s;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#F0FDFA', // Light Teal background
+                            100: '#CCFBF1',
+                            200: '#99F6E4',
+                            300: '#5EEAD4',
+                            400: '#2DD4BF',
+                            500: '#14B8A6', // Main Teal
+                            600: '#0D9488',
+                            700: '#0F766E',
+                            800: '#115E59',
+                            900: '#134E4A', // Dark Teal
+                        },
+                        accent: {
+                            50: '#FFFBEB',
+                            100: '#FEF3C7',
+                            200: '#FDE68A',
+                            300: '#FCD34D',
+                            400: '#FBBF24',
+                            500: '#F59E0B', // Amber / Gold Accent
+                            600: '#D97706',
+                            700: '#B45309',
+                            800: '#92400E',
+                            900: '#78350F',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-primary-50 antialiased" x-data="{ mobileMenuOpen: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
+
+    <!-- Navigation -->
+    <nav :class="{ 'bg-white shadow-md py-3': scrolled, 'bg-transparent py-5': !scrolled }" class="fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-serif font-bold tracking-tight" :class="scrolled ? 'text-primary-900' : 'text-white drop-shadow-md'">
+                        Ahmad<span class="text-accent-400">Ridhwan</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#tentang" :class="scrolled ? 'text-slate-600 hover:text-primary-600' : 'text-white hover:text-primary-100'" class="text-sm font-medium transition-colors">Tentang</a>
+                    <a href="#visi-misi" :class="scrolled ? 'text-slate-600 hover:text-primary-600' : 'text-white hover:text-primary-100'" class="text-sm font-medium transition-colors">Visi Misi</a>
+                    <a href="#program" :class="scrolled ? 'text-slate-600 hover:text-primary-600' : 'text-white hover:text-primary-100'" class="text-sm font-medium transition-colors">Program</a>
+                    <a href="#berita" :class="scrolled ? 'text-slate-600 hover:text-primary-600' : 'text-white hover:text-primary-100'" class="text-sm font-medium transition-colors">Berita</a>
+                    <a href="#dukung" class="bg-primary-500 hover:bg-primary-600 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">Dukung Sekarang</a>
+                </div>
+
+              
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" :class="scrolled ? 'text-slate-600' : 'text-white'" class="focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" style="display: none;" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2" class="md:hidden bg-white shadow-xl absolute w-full" style="display: none;">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#tentang" @click="mobileMenuOpen = false" class="block px-3 py-2 text-base font-medium text-slate-700 hover:text-primary-600 hover:bg-primary-50">Tentang</a>
+                <a href="#visi-misi" @click="mobileMenuOpen = false" class="block px-3 py-2 text-base font-medium text-slate-700 hover:text-primary-600 hover:bg-primary-50">Visi Misi</a>
+                <a href="#program" @click="mobileMenuOpen = false" class="block px-3 py-2 text-base font-medium text-slate-700 hover:text-primary-600 hover:bg-primary-50">Program</a>
+                <a href="#berita" @click="mobileMenuOpen = false" class="block px-3 py-2 text-base font-medium text-slate-700 hover:text-primary-600 hover:bg-primary-50">Berita</a>
+                <a href="#dukung" @click="mobileMenuOpen = false" class="block w-full text-center mt-4 bg-primary-500 hover:bg-primary-600 text-white px-5 py-3 rounded-md text-base font-semibold transition-colors">Dukung Sekarang</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-animate-gradient overflow-hidden h-screen min-h-[600px] flex items-center">
+        <!-- Background Overlay dengan Animasi Cahaya -->
+        <div class="absolute inset-0">
+            <!-- Gambar latar yang di-blend -->
+            <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Background crowd" class="w-full h-full object-cover opacity-15 mix-blend-overlay" />
+            
+            <!-- Elemen Cahaya Melayang (Glowing Orbs) -->
+            <div class="absolute -top-20 -left-20 w-96 h-96 bg-primary-300 rounded-full mix-blend-screen filter blur-[100px] opacity-40 animate-float"></div>
+            <div class="absolute top-1/3 right-0 w-[500px] h-[500px] bg-accent-400 rounded-full mix-blend-screen filter blur-[120px] opacity-30 animate-float-delayed"></div>
+            <div class="absolute -bottom-32 left-1/4 w-80 h-80 bg-primary-200 rounded-full mix-blend-screen filter blur-[90px] opacity-30 animate-float"></div>
+
+            <!-- Gradasi penutup agar teks tetap terbaca -->
+            <div class="absolute inset-0 bg-gradient-to-r from-primary-900/90 via-primary-900/60 to-transparent"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="md:w-2/3 lg:w-1/2 pt-20">
+                <span data-aos="fade-down" class="inline-block py-1 px-3 rounded-full bg-primary-800/50 text-primary-100 text-sm font-semibold tracking-wider mb-4 border border-primary-700 backdrop-blur-sm">
+                    Calon Pemimpin Masa Depan
+                </span>
+                <h1 data-aos="fade-up" data-aos-delay="100" class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight mb-6 drop-shadow-lg">
+                    Bersama Membangun <br />
+                    <span class="text-primary-300">Masa Depan</span> yang Lebih Baik.
+                </h1>
+                <p data-aos="fade-up" data-aos-delay="200" class="text-lg md:text-xl text-primary-100 mb-8 max-w-lg leading-relaxed">
+                    Dedikasi, integritas, dan kerja nyata untuk kemajuan daerah. Mari bergandengan tangan mewujudkan perubahan positif untuk semua kalangan.
+                </p>
+                <div data-aos="fade-up" data-aos-delay="300" class="flex flex-col sm:flex-row gap-4">
+                    <a href="#visi-misi" class="bg-white text-primary-900 hover:bg-slate-100 px-8 py-3.5 rounded-full font-bold text-center transition-colors shadow-lg">
+                        Pelajari Visi Kami
+                    </a>
+                    <a href="#gabung" class="bg-transparent border-2 border-white/30 text-white hover:bg-white/10 px-8 py-3.5 rounded-full font-bold text-center transition-colors backdrop-blur-sm">
+                        Bergabung Relawan
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Curve shape -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-full h-[50px] md:h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="#F0FDFA"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Stats / Quick Facts -->
+    <section class="bg-primary-50 relative z-10 -mt-12 mb-16 px-4">
+        <div data-aos="fade-up" data-aos-delay="400" class="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl p-8 grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-primary-100">
+            <div class="text-center">
+                <div class="text-3xl font-bold text-primary-600 mb-1">15+</div>
+                <div class="text-sm text-slate-500 font-medium">Tahun Pengalaman</div>
+            </div>
+            <div class="text-center pl-8">
+                <div class="text-3xl font-bold text-primary-600 mb-1">50+</div>
+                <div class="text-sm text-slate-500 font-medium">Program Berhasil</div>
+            </div>
+            <div class="text-center pl-8">
+                <div class="text-3xl font-bold text-primary-600 mb-1">2M+</div>
+                <div class="text-sm text-slate-500 font-medium">Dana Desa Tersalur</div>
+            </div>
+            <div class="text-center pl-8">
+                <div class="text-3xl font-bold text-accent-400 mb-1">100%</div>
+                <div class="text-sm text-slate-500 font-medium">Komitmen</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile / About Section -->
+    <section id="tentang" class="py-20 bg-primary-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                <!-- Image Side -->
+                <div data-aos="fade-right" class="mb-12 lg:mb-0 relative">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] md:aspect-[3/4] max-w-md mx-auto lg:mx-0 z-10">
+                        <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Potret Ahmad Ridhwan" class="w-full h-full object-cover">
+                        <!-- Overlay Signature or Badge -->
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                            <p class="text-white font-serif italic text-xl">"Kesejahteraan rakyat adalah hukum tertinggi."</p>
+                        </div>
+                    </div>
+                    <!-- Decorative Element -->
+                    <div class="absolute -top-6 -left-6 w-64 h-64 bg-primary-100 rounded-full mix-blend-multiply filter blur-2xl opacity-70"></div>
+                    <div class="absolute -bottom-6 -right-6 w-64 h-64 bg-accent-100 rounded-full mix-blend-multiply filter blur-2xl opacity-70"></div>
+                </div>
+
+                <!-- Content Side -->
+                <div data-aos="fade-left">
+                    <h2 class="text-primary-600 font-semibold tracking-wide uppercase text-sm mb-2">Mengenal Lebih Dekat</h2>
+                    <h3 class="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-6">Ahmad Ridhwan, S.H., M.Si.</h3>
+                    
+                    <div class="prose prose-lg text-slate-600 mb-8">
+                        <p>
+                            Lahir dan dibesarkan di kota ini, Ahmad Ridhwan memahami betul denyut nadi dan harapan masyarakat. Dengan latar belakang pendidikan hukum dan pengalaman lebih dari 15 tahun di pelayanan publik, beliau mendedikasikan hidupnya untuk mewujudkan tata kelola pemerintahan yang bersih dan berpihak pada rakyat.
+                        </p>
+                        <p>
+                            Perjalanan karirnya dimulai dari bawah, mendengarkan langsung aspirasi dari desa ke desa. Beliau percaya bahwa pembangunan sejati bukan hanya tentang infrastruktur fisik, melainkan juga pembangunan karakter, pendidikan, dan ekonomi kerakyatan.
+                        </p>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <a href="#perjalanan" class="text-primary-600 font-semibold hover:text-primary-800 transition-colors flex items-center">
+                            Lihat Rekam Jejak <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visi & Misi Section -->
+    <section id="visi-misi" class="py-24 bg-white relative overflow-hidden">
+        <!-- Decorative Background -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-primary-100 opacity-50 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 rounded-full bg-accent-100 opacity-50 blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div data-aos="fade-up" class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-accent-500 font-bold tracking-wider uppercase text-sm mb-2 block">Arah Perjuangan</span>
+                <h3 class="text-3xl md:text-5xl font-serif font-bold text-slate-900 mb-6">Visi & Misi</h3>
+                <div class="w-20 h-1 bg-primary-500 mx-auto rounded-full mb-6"></div>
+                <p class="text-lg text-slate-600">Landasan utama kami dalam merumuskan kebijakan yang pro-rakyat, berkelanjutan, dan berorientasi pada masa depan daerah.</p>
+            </div>
+
+            <!-- Visi Card -->
+            <div data-aos="fade-up" data-aos-delay="100" class="relative bg-slate-900 rounded-3xl p-1 mb-20 shadow-2xl overflow-hidden transform hover:-translate-y-1 transition-transform duration-300">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary-600 to-blue-500 opacity-20"></div>
+                <div class="bg-slate-900 rounded-[1.4rem] p-8 md:p-12 relative h-full flex flex-col md:flex-row items-center border border-slate-700/50">
+                    <div class="md:w-1/3 text-center md:text-left mb-8 md:mb-0 md:pr-8 md:border-r border-slate-700">
+                        <div class="w-16 h-16 bg-primary-500/20 text-primary-400 rounded-2xl flex items-center justify-center text-3xl mx-auto md:mx-0 mb-4">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold text-white mb-2">Visi Utama</h4>
+                        <p class="text-slate-400 text-sm">Cita-cita besar untuk 5 tahun ke depan bagi kemajuan bersama.</p>
+                    </div>
+                    <div class="md:w-2/3 md:pl-10 text-center md:text-left relative">
+                        <i class="fas fa-quote-left text-4xl text-slate-700/50 absolute -top-4 -left-2 md:-top-4 md:left-2"></i>
+                        <p class="text-2xl md:text-3xl font-serif font-medium leading-relaxed text-white relative z-10 pt-4">
+                            "Mewujudkan daerah yang <span class="text-primary-300">Cerdas, Mandiri, Berbudaya, dan Sejahtera</span> melalui tata kelola pemerintahan yang inklusif dan inovatif."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Misi Section -->
+            <div data-aos="fade-up" class="mb-10 text-center">
+                <h4 class="text-2xl font-bold text-slate-800 mb-2">4 Pilar Misi Pembangunan</h4>
+                <p class="text-slate-500">Langkah konkret dan terukur untuk mewujudkan visi utama</p>
+            </div>
+
+            <!-- Misi Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Misi 1 -->
+                <div data-aos="fade-up" data-aos-delay="100" class="group bg-white rounded-2xl p-8 border border-slate-200 hover:border-primary-500 hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-6 text-9xl font-bold text-slate-50 group-hover:text-primary-50 transition-colors duration-300 z-0">1</div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-blue-50 group-hover:bg-primary-500 text-primary-600 group-hover:text-white rounded-xl flex items-center justify-center text-2xl mb-6 transition-colors duration-300 shadow-sm">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-primary-600 transition-colors">Pendidikan Paripurna</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-5">Meningkatkan akses dan kualitas pendidikan dari tingkat dasar hingga kejuruan untuk menciptakan SDM berdaya saing global.</p>
+                        <ul class="text-sm text-slate-500 space-y-2 font-medium">
+                            <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2 text-xs"></i> Beasiswa Berprestasi</li>
+                            <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2 text-xs"></i> Revitalisasi Fasilitas Sekolah</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Misi 2 -->
+                <div data-aos="fade-up" data-aos-delay="200" class="group bg-white rounded-2xl p-8 border border-slate-200 hover:border-primary-300 hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-6 text-9xl font-bold text-slate-50 group-hover:text-primary-50 transition-colors duration-300 z-0">2</div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-orange-50 group-hover:bg-primary-300 text-primary-500 group-hover:text-white rounded-xl flex items-center justify-center text-2xl mb-6 transition-colors duration-300 shadow-sm">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-primary-600 transition-colors">Ekonomi Berkelanjutan</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-5">Mendorong pertumbuhan UMKM, memajukan pertanian modern, dan mengelola sektor pariwisata berwawasan lingkungan.</p>
+                        <ul class="text-sm text-slate-500 space-y-2 font-medium">
+                            <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2 text-xs"></i> Bantuan Modal UMKM</li>
+                            <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2 text-xs"></i> Stabilitas Harga Pangan</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Misi 3 -->
+                <div data-aos="fade-up" data-aos-delay="300" class="group bg-white rounded-2xl p-8 border border-slate-200 hover:border-accent-400 hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-6 text-9xl font-bold text-slate-50 group-hover:text-accent-50 transition-colors duration-300 z-0">3</div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-teal-50 group-hover:bg-accent-400 text-accent-500 group-hover:text-white rounded-xl flex items-center justify-center text-2xl mb-6 transition-colors duration-300 shadow-sm">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-accent-500 transition-colors">Kesehatan & Sosial</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-5">Optimalisasi layanan kesehatan gratis yang berkualitas dan memperkuat jaring pengaman sosial yang tepat sasaran.</p>
+                        <ul class="text-sm text-slate-500 space-y-2 font-medium">
+                            <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2 text-xs"></i> Klinik Keliling 24 Jam</li>
+                            <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2 text-xs"></i> Program Penurunan Stunting</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Misi 4 -->
+                <div data-aos="fade-up" data-aos-delay="400" class="group bg-white rounded-2xl p-8 border border-slate-200 hover:border-indigo-500 hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute -right-4 -top-6 text-9xl font-bold text-slate-50 group-hover:text-indigo-50 transition-colors duration-300 z-0">4</div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-indigo-50 group-hover:bg-indigo-500 text-indigo-600 group-hover:text-white rounded-xl flex items-center justify-center text-2xl mb-6 transition-colors duration-300 shadow-sm">
+                            <i class="fas fa-road"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">Infrastruktur Merata</h4>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-5">Pembangunan dan pemeliharaan infrastruktur dasar yang adil hingga ke pelosok desa untuk memacu konektivitas.</p>
+                        <ul class="text-sm text-slate-500 space-y-2 font-medium">
+                            <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2 text-xs"></i> Pembenahan Jalan Desa</li>
+                            <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-2 text-xs"></i> Air Bersih & Sanitasi Layak</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Programs -->
+    <section id="program" class="py-24 bg-primary-900 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div data-aos="fade-right" class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-primary-800 pb-6">
+                <div class="max-w-2xl">
+                    <h2 class="text-primary-300 font-semibold tracking-wide uppercase text-sm mb-2">Program Unggulan</h2>
+                    <h3 class="text-3xl md:text-4xl font-serif font-bold mb-4">Langkah Nyata Untuk Kemajuan</h3>
+                </div>
+                <div class="mt-4 md:mt-0">
+                    <a href="#" class="text-primary-200 hover:text-white flex items-center transition-colors">
+                        Lihat Semua Program <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Program Card -->
+                <div data-aos="zoom-in" data-aos-delay="100" class="group cursor-pointer">
+                    <div class="overflow-hidden rounded-xl mb-4 relative aspect-video">
+                        <img src="https://images.unsplash.com/photo-1577415124269-fc1140a69e91?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Program Pertanian" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <h4 class="absolute bottom-4 left-4 right-4 text-xl font-bold text-white">Petani Berdaya</h4>
+                    </div>
+                    <p class="text-slate-400 text-sm">Subsidi pupuk tepat sasaran dan asuransi gagal panen untuk stabilitas ekonomi desa.</p>
+                </div>
+                
+                <!-- Program Card -->
+                <div data-aos="zoom-in" data-aos-delay="200" class="group cursor-pointer">
+                    <div class="overflow-hidden rounded-xl mb-4 relative aspect-video">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Program Pendidikan" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <h4 class="absolute bottom-4 left-4 right-4 text-xl font-bold text-white">Satu Rumah Satu Sarjana</h4>
+                    </div>
+                    <p class="text-slate-400 text-sm">Beasiswa penuh bagi siswa berprestasi dari keluarga kurang mampu hingga perguruan tinggi.</p>
+                </div>
+
+                <!-- Program Card -->
+                <div data-aos="zoom-in" data-aos-delay="300" class="group cursor-pointer">
+                    <div class="overflow-hidden rounded-xl mb-4 relative aspect-video">
+                        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Program Kesehatan" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <h4 class="absolute bottom-4 left-4 right-4 text-xl font-bold text-white">Klinik Keliling</h4>
+                    </div>
+                    <p class="text-slate-400 text-sm">Mendekatkan akses kesehatan gratis ke pelosok daerah menggunakan kendaraan medis khusus.</p>
+                </div>
+
+                <!-- Program Card -->
+                <div data-aos="zoom-in" data-aos-delay="400" class="group cursor-pointer">
+                    <div class="overflow-hidden rounded-xl mb-4 relative aspect-video">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Program Digital" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <h4 class="absolute bottom-4 left-4 right-4 text-xl font-bold text-white">Desa Digital</h4>
+                    </div>
+                    <p class="text-slate-400 text-sm">Penyediaan akses internet cepat dan pelatihan e-commerce untuk UMKM desa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support / Volunteer Call to Action -->
+    <section id="dukung" class="py-20 relative bg-primary-50 overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+                <div class="grid md:grid-cols-2">
+                    <div data-aos="fade-right" class="p-10 md:p-12 flex flex-col justify-center">
+                        <h3 class="text-3xl font-serif font-bold text-slate-900 mb-4">Waktunya Turun Tangan!</h3>
+                        <p class="text-slate-600 mb-8">Perubahan besar tidak bisa dilakukan sendirian. Bergabunglah menjadi bagian dari pergerakan kami. Berikan dukungan Anda, baik melalui tenaga, pemikiran, maupun donasi kampanye yang transparan.</p>
+                        
+                        <div class="space-y-4">
+                            <a href="#daftar-relawan" class="flex items-center justify-center w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-4 rounded-xl font-bold transition-colors shadow-md">
+                                <i class="fas fa-users mr-3"></i> Daftar Jadi Relawan
+                            </a>
+                            <a href="#donasi" class="flex items-center justify-center w-full bg-white border-2 border-primary-200 hover:border-primary-500 hover:bg-primary-50 text-slate-800 px-6 py-4 rounded-xl font-bold transition-colors">
+                                <i class="fas fa-hand-holding-heart mr-3 text-primary-500"></i> Donasi Perjuangan
+                            </a>
+                        </div>
+                    </div>
+                    <div data-aos="fade-left" class="bg-primary-900 p-10 md:p-12 text-white relative flex flex-col justify-center overflow-hidden">
+                        <!-- BG Pattern -->
+                        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+                        
+                        <h4 class="text-2xl font-bold mb-6 relative z-10">Agenda Terdekat</h4>
+                        <ul class="space-y-6 relative z-10">
+                            <li class="flex items-start">
+                                <div class="bg-white/20 rounded-lg p-3 text-center mr-4 w-16">
+                                    <span class="block text-xs uppercase font-bold text-primary-200">Okt</span>
+                                    <span class="block text-xl font-bold">12</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-lg">Dialog Terbuka Pemuda</h5>
+                                    <p class="text-primary-100 text-sm">Gedung Kesenian Daerah • 19:00 WIB</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-white/20 rounded-lg p-3 text-center mr-4 w-16">
+                                    <span class="block text-xs uppercase font-bold text-primary-200">Okt</span>
+                                    <span class="block text-xl font-bold">15</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-lg">Blusukan Pasar Induk</h5>
+                                    <p class="text-primary-100 text-sm">Pasar Tradisional Pusat • 06:00 WIB</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-white overflow-hidden">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div data-aos="fade-up" class="text-center mb-12">
+                <h2 class="text-primary-600 font-semibold tracking-wide uppercase text-sm mb-2">Pusat Informasi</h2>
+                <h3 class="text-3xl font-serif font-bold text-slate-900">Pertanyaan Umum</h3>
+            </div>
+
+            <div class="space-y-4" x-data="{ activeAccordion: 1 }">
+                <!-- Accordion Item 1 -->
+                <div data-aos="fade-up" data-aos-delay="100" class="border border-primary-100 rounded-xl overflow-hidden">
+                    <button @click="activeAccordion = activeAccordion === 1 ? null : 1" class="flex justify-between items-center w-full p-5 text-left bg-primary-50 hover:bg-primary-100 transition-colors focus:outline-none">
+                        <span class="font-semibold text-slate-800">Bagaimana cara mendaftar sebagai relawan?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200" :class="{ 'rotate-180': activeAccordion === 1 }"></i>
+                    </button>
+                    <div x-show="activeAccordion === 1" x-collapse>
+                        <div class="p-5 text-slate-600 bg-white border-t border-primary-100">
+                            Anda dapat mengklik tombol "Daftar Jadi Relawan" di atas atau mengunjungi posko kemenangan terdekat di setiap kecamatan. Isi formulir singkat, dan tim koordinator kami akan menghubungi Anda.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 2 -->
+                <div data-aos="fade-up" data-aos-delay="200" class="border border-primary-100 rounded-xl overflow-hidden">
+                    <button @click="activeAccordion = activeAccordion === 2 ? null : 2" class="flex justify-between items-center w-full p-5 text-left bg-primary-50 hover:bg-primary-100 transition-colors focus:outline-none">
+                        <span class="font-semibold text-slate-800">Darimana sumber dana kampanye ini?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200" :class="{ 'rotate-180': activeAccordion === 2 }"></i>
+                    </button>
+                    <div x-show="activeAccordion === 2" x-collapse style="display: none;">
+                        <div class="p-5 text-slate-600 bg-white border-t border-primary-100">
+                            Kami mengedepankan transparansi. Dana kampanye berasal dari donasi publik yang sah menurut undang-undang, sumbangan relawan, dan dana pribadi. Laporan keuangan akan dipublikasikan secara berkala.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accordion Item 3 -->
+                <div data-aos="fade-up" data-aos-delay="300" class="border border-primary-100 rounded-xl overflow-hidden">
+                    <button @click="activeAccordion = activeAccordion === 3 ? null : 3" class="flex justify-between items-center w-full p-5 text-left bg-primary-50 hover:bg-primary-100 transition-colors focus:outline-none">
+                        <span class="font-semibold text-slate-800">Bagaimana saya bisa mengundang Bapak Ahmad ke acara lingkungan saya?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-200" :class="{ 'rotate-180': activeAccordion === 3 }"></i>
+                    </button>
+                    <div x-show="activeAccordion === 3" x-collapse style="display: none;">
+                        <div class="p-5 text-slate-600 bg-white border-t border-primary-100">
+                            Silakan gunakan formulir kontak di bawah atau hubungi nomor sekretariat. Harap berikan proposal atau detail acara setidaknya 2 minggu sebelum hari H agar kami dapat menyesuaikan jadwal.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <footer class="bg-primary-900 pt-20 pb-10 text-primary-100 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 mb-16">
+                <!-- Aspirasi Form -->
+                <div data-aos="fade-right">
+                    <h3 class="text-2xl font-serif font-bold text-white mb-6">Sampaikan Aspirasi Anda</h3>
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Terima kasih! Aspirasi Anda telah kami terima.');">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="name" class="sr-only">Nama Lengkap</label>
+                                <input type="text" id="name" placeholder="Nama Lengkap" class="w-full bg-primary-800 border border-primary-700 rounded-lg px-4 py-3 text-white placeholder-primary-300 focus:outline-none focus:border-accent-400 focus:ring-1 focus:ring-accent-400" required>
+                            </div>
+                            <div>
+                                <label for="phone" class="sr-only">Nomor HP</label>
+                                <input type="tel" id="phone" placeholder="Nomor HP / WA" class="w-full bg-primary-800 border border-primary-700 rounded-lg px-4 py-3 text-white placeholder-primary-300 focus:outline-none focus:border-accent-400 focus:ring-1 focus:ring-accent-400" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="message" class="sr-only">Pesan / Aspirasi</label>
+                            <textarea id="message" rows="4" placeholder="Tuliskan keluhan atau harapan Anda untuk daerah ini..." class="w-full bg-primary-800 border border-primary-700 rounded-lg px-4 py-3 text-white placeholder-primary-300 focus:outline-none focus:border-accent-400 focus:ring-1 focus:ring-accent-400" required></textarea>
+                        </div>
+                        <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-6 rounded-lg transition-colors w-full sm:w-auto">
+                            Kirim Aspirasi <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Info & Social -->
+                <div data-aos="fade-left">
+                    <div class="mb-8">
+                        <a href="#" class="text-3xl font-serif font-bold tracking-tight text-white mb-4 block">
+                            Ahmad<span class="text-accent-400">Ridhwan</span>
+                        </a>
+                        <p class="text-primary-200 max-w-sm">Sekretariat Bersama Pemenangan.<br> Jl. Kemerdekaan No. 45, Gedung A Lantai 2.</p>
+                    </div>
+                    
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-primary-400 w-6"></i>
+                            <a href="mailto:kontak@ahmadridhwan.id" class="hover:text-white transition-colors">kontak@ahmadridhwan.id</a>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone-alt text-primary-400 w-6"></i>
+                            <a href="tel:+628112345678" class="hover:text-white transition-colors">+62 811-234-5678</a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-white font-bold mb-4">Mari Terhubung</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-primary-800 rounded-full flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-primary-800 rounded-full flex items-center justify-center hover:bg-primary-600 hover:text-white transition-all">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-primary-800 rounded-full flex items-center justify-center hover:bg-accent-500 hover:text-white transition-all">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-primary-800 rounded-full flex items-center justify-center hover:bg-red-600 hover:text-white transition-all">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-primary-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-primary-300">
+                <p>&copy; 2026 Tim Sukses Ahmad Ridhwan. Hak Cipta Dilindungi.</p>
+                <div class="mt-4 md:mt-0 space-x-4">
+                    <a href="#" class="hover:text-primary-100">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-primary-100">Syarat & Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <div x-data="{ showScrollTop: false }" @scroll.window="showScrollTop = (window.pageYOffset > 500)">
+        <button 
+            x-show="showScrollTop" 
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 translate-y-10"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 translate-y-10"
+            @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+            class="fixed bottom-8 right-8 z-50 w-14 h-14 bg-primary-500 hover:bg-primary-600 text-white rounded-full shadow-2xl hover:shadow-primary-500/40 transition-all duration-300 transform hover:-translate-y-1 focus:outline-none flex items-center justify-center group"
+            aria-label="Kembali ke atas"
+            style="display: none;"
+        >
+            <i class="fas fa-arrow-up text-xl group-hover:-translate-y-1 transition-transform duration-300"></i>
+        </button>
+    </div>
+
+    <!-- Initialize AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800, // Durasi animasi dalam milidetik
+            easing: 'ease-out-cubic', // Gaya animasi yang lebih lembut
+            once: true, // Animasi hanya berjalan satu kali saat pertama kali muncul
+            offset: 100 // Elemen akan teranimasi ketika 100px masuk ke dalam layar
+        });
+    </script>
+</body>
+</html>
